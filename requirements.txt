@@ -1,0 +1,2 @@
+Flask-PyMongo==2.3.0
+isodate==0.6.0
