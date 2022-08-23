@@ -25,17 +25,17 @@ class ObjectIdConverter(BaseConverter):
     def to_url(self, value):
         return str(value)
 
-##!## This next block is deprecated and should be considered for removal.
-## def find_restaurants(mongo, _id=None):
-##    query = {}
-##    if _id:
-##        query["_id"] = ObjectId(_id)
-##    result = mongo.db.restaurant.find(query)
-##    result_count = len(list(result.clone()))
-##    if result_count > 1:
-##        return list(result)
-##    else:
-##        return next(result, {})
+##!## This next function is deprecated and should be considered for removal. Kept around because of tests
+def find_restaurants(mongo, _id=None):
+   query = {}
+   if _id:
+       query["_id"] = ObjectId(_id)
+   result = mongo.db.restaurant.find(query)
+   result_count = len(list(result.clone()))
+   if result_count > 1:
+       return list(result)
+   else:
+       return next(result, {})
 
 def find_restaurants_2(mongo, field=None, search=None):
     query = {}
