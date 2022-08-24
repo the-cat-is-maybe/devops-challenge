@@ -14,6 +14,14 @@ jobs:
       - run:
           name: Run tests
           command: tox
+#  export-to-artifactory:
+#    docker:
+#      - image: <image made to meet company specs on building and exporting>
+#    steps:
+#      - checkout
+#      - run:
+#         name: Export to Artifactory
+#          command: <command made to build and export to artifactory>
 
 
 workflows:

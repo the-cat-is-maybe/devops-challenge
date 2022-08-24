@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  
+  mongodb:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: this-is-totally-a-docker-secret
+      MONGO_INITDB_DATABASE: devops-challenge-db
+    ports: 
+      - 27017:27017
+    volumes:
+      - ./data/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+  mongo-seed:
+    build: ./data
+    depends_on:
+      - mongodb
+    restart: on-failure
+  
+  application:
+    build: 
+      dockerfile: application.Dockerfile
+    environment:
+      - MONGO_URI=mongodb://devopsC:dev0psUs3r@mongodb:27017/devops-challenge-db
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongodb-seed
+    

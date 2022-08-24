@@ -1,0 +1,32 @@
+
+#ignore cicd
+.circleci/
+
+#ignore testing
+**tox**
+tests/
+
+#ignore virtual environment
+.venv/
+
+#ignore git
+.git
+.gitignore
+
+#ignore pycache things
+**/__pycache__
+**/*.pyc
+
+#ignore images used just for pretty git pages
+assets/
+
+#ignore data
+data/
+
+#ignore docker things
+*Dockerfile*
+
+#ignore loosends in root
+requirements_dev.txt
+py*/
+log/**
