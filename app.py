@@ -5,7 +5,7 @@ from bson.objectid import ObjectId
 from flask import Flask, jsonify
 from flask_pymongo import PyMongo
 
-from src.mongoflask  import MongoJSONEncoder, ObjectIdConverter, find_restaurants_2
+from src.mongoflask  import MongoJSONEncoder, ObjectIdConverter, find_restaurants
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = environ.get("MONGO_URI")
@@ -16,12 +16,12 @@ mongo = PyMongo(app)
 
 @app.route("/api/v1/restaurant")
 def restaurants():
-    restaurants = find_restaurants_2(mongo)
+    restaurants = find_restaurants(mongo)
     return jsonify(restaurants)
 
 @app.route("/api/v1/restaurant/<id>")
 def restaurant(id):
-    restaurants = find_restaurants_2(mongo, "_id", ObjectId(id))
+    restaurants = find_restaurants(mongo, "_id", ObjectId(id))
     if restaurants == {}:
         return '', 204
     else:
@@ -29,7 +29,7 @@ def restaurant(id):
 
 @app.route("/api/v2/restaurant/<field>/<search>")
 def restaurant_wide_search(field,search):
-    restaurants = find_restaurants_2(mongo, field, search)
+    restaurants = find_restaurants(mongo, field, search)
     if restaurants == {}:
         return '', 204
     else:
